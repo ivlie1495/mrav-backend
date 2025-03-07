@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "prisma generate --no-engine && prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",
