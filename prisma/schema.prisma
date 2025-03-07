@@ -29,6 +29,8 @@ model Transaction {
   walletId   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
 }
 
 model Category {
@@ -37,6 +39,8 @@ model Category {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   Transaction Transaction[]
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String
 }
 
 model Wallet {
@@ -46,4 +50,18 @@ model Wallet {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   Transaction Transaction[]
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String
+}
+
+model User {
+  id          String        @id @default(cuid())
+  externalId  String        @unique
+  name        String
+  email       String        @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Transaction Transaction[]
+  Wallet      Wallet[]
+  Category    Category[]
 }
